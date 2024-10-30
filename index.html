@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="start-quiz-button">开始测试</button>
+    <input
+      type="text"
+      id="input-character"
+      onchange="handleInputCharacter"
+      value="我"
+    />
+    <div id="character-target-div"></div>
+    <script src="hanzi-writer.js"></script>
+    <script>
+      const startQuizButton = document.getElementById("start-quiz-button");
+      const inputCharacter = document.getElementById("input-character");
+      const characterTargetDiv = document.getElementById(
+        "character-target-div"
+      );
+      let writer;
+      startQuizButton.addEventListener("click", () => {
+        if (!inputCharacter.value) {
+          alert("请输入要测试的汉字");
+          return;
+        }
+        writer = HanziWriter.create(characterTargetDiv, inputCharacter.value, {
+          width: 150,
+          height: 150,
+          showCharacter: false,
+          showOutline: false,
+          showHintAfterMisses: 1,
+          padding: 5,
+        });
+        writer.quiz();
+      });
+      writer = HanziWriter.create(characterTargetDiv, "我", {
+        width: 150,
+        height: 150,
+        showCharacter: false,
+        showOutline: false,
+        showHintAfterMisses: 1,
+        padding: 5,
+      });
+      writer.quiz();
+    </script>
+  </body>
+  <style>
+    #character-target-div {
+      width: 150px;
+      height: 150px;
+      margin: 0 auto;
+      border: 1px solid #000;
+    }
+  </style>
+</html>
